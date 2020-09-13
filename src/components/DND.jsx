@@ -1,9 +1,16 @@
 import React from 'react';
-
+import { InputBase } from "@material-ui/core";
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 
 const grid = 8
 function Drag(elements, boxStyle, elementsStyle) {
+      function handleChange(e) {
+            console.log(e)
+      }
+      function handleKeyDown(e) {
+            console.log(elements.findIndex((item) => item === e.target.value))
+            console.log(e.key)
+      }
       return (
             <div>
                   {elements.map((e, index) => (
@@ -20,7 +27,16 @@ function Drag(elements, boxStyle, elementsStyle) {
                                                 ...provided.draggableProps.style,
                                                 ...elementsStyle
                                           }}
-                                    >{e}</div>
+                                    >
+
+                                          <InputBase
+                                                fullWidth
+                                                value={e}
+                                                // onChange={handleChange}
+                                                onKeyDown={handleKeyDown}
+                                          // onFocus={(e) => console.log(e.target.value)}
+                                          />
+                                    </div>
                               )}
                         </Draggable>
                   ))}
