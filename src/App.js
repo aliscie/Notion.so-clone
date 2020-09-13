@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 
 
 function App() {
-      const elements = ['first', 'secon', 'thid ']
+      let elements = ['first', 'secon', 'thid ']
 
       const grid = 8
       function Drag(elements, boxStyle, elementsStyle) {
@@ -44,14 +44,24 @@ function App() {
                                     }}
                               >
                                     {Drag(elements, boxStyle, elementsStyle)}
+                                    {provided.placeholder}
                               </div>
                         )}
                   </Droppable>
             )
       }
       function DND({ elements, boxStyle, elementsStyle }) {
+
+            function reOrder(r) {
+                  // console.log(Array.from(elements))
+                  // console.log(elements)
+                  // console.log(elements, r.source.index, r.destination.index)
+                  const [removed] = elements.splice(r.source.index, 1);
+                  elements.splice(r.destination.index, 0, removed);
+            }
+
             return (
-                  <DragDropContext onDragEnd={(r) => console.log(r)}>
+                  <DragDropContext onDragEnd={reOrder}>
                         {Drop(elements, boxStyle, elementsStyle)}
                   </DragDropContext >
             )
