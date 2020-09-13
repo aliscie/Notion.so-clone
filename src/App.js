@@ -4,49 +4,64 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 
 function App() {
       const elements = ['first', 'secon', 'thid ']
+
       const grid = 8
-      return (
-            <DragDropContext onDragEnd={(r) => console.log(r)}>
+      function Drag(elements, boxStyle, elementsStyle) {
+            return (
+                  <div>
+                        {elements.map((e, index) => (
+                              <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
+                                    {(provided, snapshot) => (
+                                          <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={{
+                                                      background: provided.isDraggingOver ? 'lightgreen' : 'green',
+                                                      padding: grid,
+                                                      overflow: 'auto',
+                                                      ...provided.draggableProps.style,
+                                                      ...elementsStyle
+                                                }}
+                                          >{e}</div>
+                                    )}
+                              </Draggable>
+                        ))}
+                  </div>
+            )
+      }
+      function Drop(elements, boxStyle, elementsStyle) {
+            return (
                   <Droppable droppableId='droppable'>
                         {(provided, snapshot) => (
                               <div
                                     ref={provided.innerRef}
-                                    // {...provided.droppableProps}
                                     style={{
-                                          background: provided.isDraggingOver ? 'lightblue' : 'grey',
                                           padding: grid,
-                                          border: '5px solid pink',
-                                          width: '100%',
-                                          height: '1000px',
-                                          overflow: 'auto'
+                                          overflow: 'auto',
+                                          height: '300px',
+                                          ...boxStyle
                                     }}
                               >
-                                    {elements.map((e, index) => (
-                                          <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
-                                                {(provided, snapshot) => (
-                                                      <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            style={{
-                                                                  background: provided.isDraggingOver ? 'lightgreen' : 'green',
-                                                                  padding: grid,
-                                                                  border: '5px solid pink',
-                                                                  width: '100%',
-                                                                  height: '1000px',
-                                                                  overflow: 'auto',
-                                                                  ...provided.draggableProps.style,
-                                                                  width: '100px',
-                                                                  height: '100px'
-                                                            }}
-                                                      >{e}</div>
-                                                )}
-                                          </Draggable>
-                                    ))}
+                                    {Drag(elements, boxStyle, elementsStyle)}
                               </div>
                         )}
                   </Droppable>
-            </DragDropContext >
+            )
+      }
+      function DND({ elements, boxStyle, elementsStyle }) {
+            return (
+                  <DragDropContext onDragEnd={(r) => console.log(r)}>
+                        {Drop(elements, boxStyle, elementsStyle)}
+                  </DragDropContext >
+            )
+      }
+
+      return (
+            <div>
+                  <DND boxStyle={{ background: 'black' }} elementsStyle={{ background: 'white' }} elements={elements} />
+            </div>
+
       )
 }
 
