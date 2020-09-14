@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputBase } from "@material-ui/core";
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+// import update from 'react-addons-update';
+import update from 'immutability-helper'
 
 const grid = 8
-function Drag(elements, boxStyle, elementsStyle) {
-      function handleChange(e) {
-            console.log(e)
-      }
+function Drag(es, boxStyle, elementsStyle) {
+      let elements = es
+
       function handleKeyDown(e) {
-            console.log(elements.findIndex((item) => item === e.target.value))
-            console.log(e.key)
+            const foundE = elements.find(({ id }) => `${id}` === e.target.id)
+            const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
+            Object.assign(foundE, updatedE)
+            // console.log(elements)
+
       }
+
       return (
             <div>
                   {elements.map((e, index) => (
@@ -28,14 +33,12 @@ function Drag(elements, boxStyle, elementsStyle) {
                                                 ...elementsStyle
                                           }}
                                     >
-
-                                          <InputBase
-                                                fullWidth
-                                                value={e}
-                                                // onChange={handleChange}
+                                          <div
+                                                id={e.id}
+                                                style={{ outline: 'none' }}
+                                                contentEditable='true'
                                                 onKeyDown={handleKeyDown}
-                                          // onFocus={(e) => console.log(e.target.value)}
-                                          />
+                                          >{e.text}</div>
                                     </div>
                               )}
                         </Draggable>
