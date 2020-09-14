@@ -1,72 +1,90 @@
-import React, { useState } from 'react';
-import { InputBase } from "@material-ui/core";
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-// import update from 'react-addons-update';
-import update from 'immutability-helper'
+import Checkbox from '@material-ui/core/Checkbox';
+import Pop from './Popover'
 
 const grid = 8
-function Drag(es, boxStyle, elementsStyle) {
-      let elements = es
 
-      function handleKeyDown(e) {
-            const foundE = elements.find(({ id }) => `${id}` === e.target.id)
-            const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
-            Object.assign(foundE, updatedE)
-            // console.log(elements)
-
-      }
-
-      return (
-            <div>
-                  {elements.map((e, index) => (
-                        <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
-                              {(provided, snapshot) => (
-                                    <div
-                                          ref={provided.innerRef}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                          style={{
-                                                background: provided.isDraggingOver ? 'lightgreen' : 'green',
-                                                padding: grid,
-                                                overflow: 'auto',
-                                                ...provided.draggableProps.style,
-                                                ...elementsStyle
-                                          }}
-                                    >
-                                          <div
-                                                id={e.id}
-                                                style={{ outline: 'none' }}
-                                                contentEditable='true'
-                                                onKeyDown={handleKeyDown}
-                                          >{e.text}</div>
-                                    </div>
-                              )}
-                        </Draggable>
-                  ))}
-            </div>
-      )
-}
-function Drop(elements, boxStyle, elementsStyle) {
-      return (
-            <Droppable droppableId='droppable'>
-                  {(provided, snapshot) => (
-                        <div
-                              ref={provided.innerRef}
-                              style={{
-                                    padding: grid,
-                                    overflow: 'auto',
-                                    height: '300px',
-                                    ...boxStyle
-                              }}
-                        >
-                              {Drag(elements, boxStyle, elementsStyle)}
-                              {provided.placeholder}
-                        </div>
-                  )}
-            </Droppable>
-      )
-}
 function DND({ elements, boxStyle, elementsStyle }) {
+      const [state, set] = useState(elements)
+      const [anchorEl, setAnchorEl] = useState(null);
+
+      function Drag() {
+
+            function handlKey(e) {
+                  // let x = state
+                  // const foundE = state.find(({ id }) => `${id}` === e.target.id)
+                  // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
+                  // Object.assign(foundE, updatedE)
+                  // console.log(x)
+                  // set(x)
+                  // console.log(state)
+
+
+                  if (e.target.innerText.includes('/')) {
+                        setAnchorEl(e.currentTarget)
+                  }
+            }
+
+            return (
+                  <div>
+                        {state.map((e, index) => (
+                              <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
+                                    {(provided, snapshot) => (
+                                          <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={{
+                                                      padding: grid,
+                                                      overflow: 'auto',
+                                                      ...provided.draggableProps.style,
+
+                                                }}
+                                          >
+
+                                                <div
+                                                      id={e.id}
+                                                      style={{ display: 'flex' }}
+                                                >
+                                                      {e.checkBox === true && <Checkbox defaultChecked color="primary" />}
+                                                      {e.checkBox === false && <Checkbox color="primary" />}
+                                                      {e.checkBox === null && null}
+                                                      <div
+                                                            style={{ outline: 'none' }}
+                                                            contentEditable='true'
+                                                            onKeyUp={handlKey}
+                                                            style={{ ...elementsStyle, width: '100%', outline: 'none' }}
+                                                      >{e.text}</div>
+                                                      <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                                                </div>
+                                          </div>
+                                    )}
+                              </Draggable>
+                        ))}
+                  </div>
+            )
+      }
+      function Drop() {
+            return (
+                  <Droppable droppableId='droppable'>
+                        {(provided, snapshot) => (
+                              <div
+                                    ref={provided.innerRef}
+                                    style={{
+                                          padding: grid,
+                                          overflow: 'auto',
+                                          height: '300px',
+                                          ...boxStyle
+                                    }}
+                              >
+                                    {Drag(boxStyle, elementsStyle)}
+                                    {provided.placeholder}
+                              </div>
+                        )}
+                  </Droppable>
+            )
+      }
 
       function reOrder(r) {
             const [removed] = elements.splice(r.source.index, 1);
@@ -75,7 +93,7 @@ function DND({ elements, boxStyle, elementsStyle }) {
 
       return (
             <DragDropContext onDragEnd={reOrder}>
-                  {Drop(elements, boxStyle, elementsStyle)}
+                  {Drop(state, boxStyle, elementsStyle)}
             </DragDropContext >
       )
 }
