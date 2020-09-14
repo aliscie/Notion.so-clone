@@ -20,6 +20,23 @@ function DND({ elements, boxStyle, elementsStyle }) {
                   // set(x)
                   // console.log(state)
 
+                  if (e.keyCode == 13) {
+
+                        const index = state.findIndex((item) => `${item.id}` == e.target.id);
+                        console.log(index, e.target.id)
+
+                        set((pre) => {
+                              return [
+                                    ...pre.slice(0, index + 1),
+                                    { id: state.length + 1, text: "xxx" },
+                                    ...pre.slice(index + 1, state.length)
+                              ];
+                        });
+                        setTimeout(() => {
+                              document.getElementById(state.length + 1).focus();
+                        }, 0);
+                        console.log(state)
+                  }
 
                   if (e.target.innerText.includes('/')) {
                         setAnchorEl(e.currentTarget)
@@ -35,26 +52,23 @@ function DND({ elements, boxStyle, elementsStyle }) {
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
-                                                style={{
-                                                      padding: grid,
-                                                      overflow: 'auto',
-                                                      ...provided.draggableProps.style,
+                                          // style={{
+                                          //       padding: grid,
+                                          //       overflow: 'auto',
+                                          //       ...provided.draggableProps.style,
 
-                                                }}
+                                          // }}
                                           >
-
                                                 <div
-                                                      id={e.id}
-                                                      style={{ display: 'flex' }}
                                                 >
                                                       {e.checkBox === true && <Checkbox defaultChecked color="primary" />}
                                                       {e.checkBox === false && <Checkbox color="primary" />}
                                                       {e.checkBox === null && null}
                                                       <div
-                                                            style={{ outline: 'none' }}
+                                                            id={e.id}
                                                             contentEditable='true'
                                                             onKeyUp={handlKey}
-                                                            style={{ ...elementsStyle, width: '100%', outline: 'none' }}
+                                                            style={{ ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
                                                       >{e.text}</div>
                                                       <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
                                                 </div>
