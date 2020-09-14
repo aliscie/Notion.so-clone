@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Checkbox from '@material-ui/core/Checkbox';
 import Pop from './Popover'
-
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 const grid = 8
 
 function DND({ elements, boxStyle, elementsStyle }) {
@@ -23,7 +23,6 @@ function DND({ elements, boxStyle, elementsStyle }) {
                   if (e.keyCode == 13) {
 
                         const index = state.findIndex((item) => `${item.id}` == e.target.id);
-                        console.log(index, e.target.id)
 
                         set((pre) => {
                               return [
@@ -35,7 +34,7 @@ function DND({ elements, boxStyle, elementsStyle }) {
                         setTimeout(() => {
                               document.getElementById(state.length + 1).focus();
                         }, 0);
-                        console.log(state)
+                        // console.log(state)
                   }
 
                   if (e.target.innerText.includes('/')) {
@@ -59,8 +58,8 @@ function DND({ elements, boxStyle, elementsStyle }) {
 
                                           // }}
                                           >
-                                                <div
-                                                >
+                                                <div>
+                                                      <DragIndicatorIcon />
                                                       {e.checkBox === true && <Checkbox defaultChecked color="primary" />}
                                                       {e.checkBox === false && <Checkbox color="primary" />}
                                                       {e.checkBox === null && null}
@@ -101,8 +100,12 @@ function DND({ elements, boxStyle, elementsStyle }) {
       }
 
       function reOrder(r) {
-            const [removed] = elements.splice(r.source.index, 1);
-            elements.splice(r.destination.index, 0, removed);
+            const x = state
+            const [removed] = x.splice(r.source.index, 1);
+            x.splice(r.destination.index, 0, removed);
+            setTimeout(() => {
+                  set(x)
+            }, 0)
       }
 
       return (
