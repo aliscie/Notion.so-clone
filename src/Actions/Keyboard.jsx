@@ -32,20 +32,23 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
                   set((pre) => {
                         return [
                               ...pre.slice(0, index + 1),
-                              { id: state.length + 1, text: "xxx" },
+                              { id: state.length + 1, text: "", style: { color: 'gray' } },
                               ...pre.slice(index + 1, state.length)
                         ];
                   });
                   setTimeout(() => {
-                        console.log(document.getElementById(state.length + 1))
+                        // console.log(document.getElementById(state.length + 1))
                         document.getElementById(state.length + 1).focus();
                   }, 0);
             }
 
-            if (e.target.innerText.includes('/')) {
+            if (e.keyCode == 18) {
+                  // e.target.innerText = e.target.innerText.split('\n').join('')
                   setAnchorEl(e.currentTarget)
             }
+
       }
+
       return (
             <div style={{ opacity: isDragging ? '0.2' : '1' }} onMouseOver={() => SetIsOver(true)} onMouseLeave={() => SetIsOver(false)}>
                   <DragIndicatorIcon style={{ opacity: mouseIsOver ? '1' : '0' }} />
@@ -54,7 +57,8 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
                         id={e.id}
                         contentEditable='true'
                         onKeyUp={handlKey}
-                        style={{ ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
+                        style={{ ...e.style, ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
+                  //(e.text.lenght<0)&&(inntertext =='att text or hit / to add elment.')+(stle={{color:'gray'}})
                   >{e.text}</div>
                   <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
             </div>
