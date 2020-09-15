@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import Checkbox from '@material-ui/core/Checkbox';
+import CheckBox from './CheckBox'
 import Pop from './Popover'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import Keyboard from '../Actions/Keyboard';
 const grid = 8
 
 function DND({ elements, boxStyle, elementsStyle }) {
@@ -10,37 +11,6 @@ function DND({ elements, boxStyle, elementsStyle }) {
       const [anchorEl, setAnchorEl] = useState(null);
 
       function Drag() {
-
-            function handlKey(e) {
-                  // let x = state
-                  // const foundE = state.find(({ id }) => `${id}` === e.target.id)
-                  // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
-                  // Object.assign(foundE, updatedE)
-                  // console.log(x)
-                  // set(x)
-                  // console.log(state)
-
-                  if (e.keyCode == 13) {
-
-                        const index = state.findIndex((item) => `${item.id}` == e.target.id);
-
-                        set((pre) => {
-                              return [
-                                    ...pre.slice(0, index + 1),
-                                    { id: state.length + 1, text: "xxx" },
-                                    ...pre.slice(index + 1, state.length)
-                              ];
-                        });
-                        setTimeout(() => {
-                              document.getElementById(state.length + 1).focus();
-                        }, 0);
-                        // console.log(state)
-                  }
-
-                  if (e.target.innerText.includes('/')) {
-                        setAnchorEl(e.currentTarget)
-                  }
-            }
 
             return (
                   <div>
@@ -60,15 +30,8 @@ function DND({ elements, boxStyle, elementsStyle }) {
                                           >
                                                 <div>
                                                       <DragIndicatorIcon />
-                                                      {e.checkBox === true && <Checkbox defaultChecked color="primary" />}
-                                                      {e.checkBox === false && <Checkbox color="primary" />}
-                                                      {e.checkBox === null && null}
-                                                      <div
-                                                            id={e.id}
-                                                            contentEditable='true'
-                                                            onKeyUp={handlKey}
-                                                            style={{ ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
-                                                      >{e.text}</div>
+                                                      <CheckBox e={e} />
+                                                      <Keyboard setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                       <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
                                                 </div>
                                           </div>
