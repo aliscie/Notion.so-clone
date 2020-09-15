@@ -2,6 +2,8 @@ import React from 'react'
 
 function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
       function handlKey(e) {
+            const index = state.findIndex((item) => `${item.id}` == e.target.id);
+
             // let x = state
             // const foundE = state.find(({ id }) => `${id}` === e.target.id)
             // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
@@ -9,11 +11,18 @@ function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
             // console.log(x)
             // set(x)
             // console.log(state)
+            if (e.target.innerText.length == 0) {
+                  if (e.keyCode == 8) {
+                        set((pre) => {
+                              return [
+                                    ...pre.slice(0, index),
+                                    ...pre.slice(index + 1, state.length)
+                              ];
+                        })
+                  }
 
+            }
             if (e.keyCode == 13) {
-
-                  const index = state.findIndex((item) => `${item.id}` == e.target.id);
-
                   set((pre) => {
                         return [
                               ...pre.slice(0, index + 1),
