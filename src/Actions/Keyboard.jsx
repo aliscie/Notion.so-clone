@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CheckBox from '../components/CheckBox'
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import Pop from '../components/Popover'
 
-function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
+function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl }) {
+      const [mouseIsOver, SetIsOver] = useState(false)
       function handlKey(e) {
-            // e.preventDefault()
-            e.target.innerText = e.target.innerText.split('\n').join('')
+
             const index = state.findIndex((item) => `${item.id}` == e.target.id);
 
             // let x = state
@@ -25,6 +28,7 @@ function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
 
             }
             if (e.keyCode == 13) {
+                  e.target.innerText = e.target.innerText.split('\n').join('')
                   set((pre) => {
                         return [
                               ...pre.slice(0, index + 1),
@@ -33,9 +37,9 @@ function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
                         ];
                   });
                   setTimeout(() => {
+                        console.log(document.getElementById(state.length + 1))
                         document.getElementById(state.length + 1).focus();
                   }, 0);
-                  // console.log(state)
             }
 
             if (e.target.innerText.includes('/')) {
@@ -43,12 +47,17 @@ function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
             }
       }
       return (
-            <div
-                  id={e.id}
-                  contentEditable='true'
-                  onKeyUp={handlKey}
-                  style={{ ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
-            >{e.text}</div>
+            <div style={{ opacity: isDragging ? '0.2' : '1' }} onMouseOver={() => SetIsOver(true)} onMouseLeave={() => SetIsOver(false)}>
+                  <DragIndicatorIcon style={{ opacity: mouseIsOver ? '1' : '0' }} />
+                  <CheckBox e={e} />
+                  <div
+                        id={e.id}
+                        contentEditable='true'
+                        onKeyUp={handlKey}
+                        style={{ ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
+                  >{e.text}</div>
+                  <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+            </div>
       )
 }
 

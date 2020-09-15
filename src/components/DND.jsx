@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import CheckBox from './CheckBox'
-import Pop from './Popover'
-import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 import Keyboard from '../Actions/Keyboard';
 const grid = 8
 
 function DND({ elements, boxStyle, elementsStyle }) {
+      const [mouseIsOver, SetIsOver] = useState(false)
+
       const [state, set] = useState(elements)
       const [anchorEl, setAnchorEl] = useState(null);
 
@@ -28,11 +27,8 @@ function DND({ elements, boxStyle, elementsStyle }) {
 
                                           // }}
                                           >
-                                                <div>
-                                                      <DragIndicatorIcon />
-                                                      <CheckBox e={e} />
-                                                      <Keyboard setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
-                                                      <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                                                <div onMouseOver={() => SetIsOver(true)} onMouseLeave={() => SetIsOver(false)} >
+                                                      <Keyboard isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                 </div>
                                           </div>
                                     )}
