@@ -2,6 +2,8 @@ import React from 'react'
 
 function Keyboard({ state, set, e, setAnchorEl, elementsStyle }) {
       function handlKey(e) {
+            // e.preventDefault()
+            e.target.innerText = e.target.innerText.split('\n').join('')
             const index = state.findIndex((item) => `${item.id}` == e.target.id);
 
             // let x = state
