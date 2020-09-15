@@ -5,6 +5,7 @@ import Pop from '../components/Popover'
 
 function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl }) {
       const [mouseIsOver, SetIsOver] = useState(false)
+      const [searchValue, setSearch] = useState('')
       function handlKey(e) {
 
             const index = state.findIndex((item) => `${item.id}` == e.target.id);
@@ -32,10 +33,11 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
                   set((pre) => {
                         return [
                               ...pre.slice(0, index + 1),
-                              { id: state.length + 1, text: "", style: { color: 'gray' } },
+                              { id: state.length + 1, text: null, style: { color: 'gray' }, checkBox: (state[index].checkBox !== null) ? false : null },
                               ...pre.slice(index + 1, state.length)
                         ];
                   });
+
                   setTimeout(() => {
                         // console.log(document.getElementById(state.length + 1))
                         document.getElementById(state.length + 1).focus();
@@ -45,6 +47,7 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
             if (e.keyCode == 18) {
                   // e.target.innerText = e.target.innerText.split('\n').join('')
                   setAnchorEl(e.currentTarget)
+                  // console.log(document.getElementById('searchValue').focus())
             }
 
       }
@@ -54,13 +57,16 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
                   <DragIndicatorIcon style={{ opacity: mouseIsOver ? '1' : '0' }} />
                   <CheckBox e={e} />
                   <div
+                        placeholder='placeholder'
                         id={e.id}
                         contentEditable='true'
+                        suppressContentEditableWarning={true}
                         onKeyUp={handlKey}
                         style={{ ...e.style, ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
                   //(e.text.lenght<0)&&(inntertext =='att text or hit / to add elment.')+(stle={{color:'gray'}})
                   >{e.text}</div>
-                  <Pop anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                  <Pop searchValue={searchValue} e={e} anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                  <input hidden onChange={e => setSearch(e.target.value)} />
             </div>
       )
 }

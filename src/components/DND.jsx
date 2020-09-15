@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Keyboard from '../Actions/Keyboard';
 const grid = 8
 
 function DND({ elements, boxStyle, elementsStyle }) {
-      const [mouseIsOver, SetIsOver] = useState(false)
 
       const [state, set] = useState(elements)
       const [anchorEl, setAnchorEl] = useState(null);
@@ -27,7 +26,7 @@ function DND({ elements, boxStyle, elementsStyle }) {
 
                                           // }}
                                           >
-                                                <div onMouseOver={() => SetIsOver(true)} onMouseLeave={() => SetIsOver(false)} >
+                                                <div>
                                                       <Keyboard isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                 </div>
                                           </div>

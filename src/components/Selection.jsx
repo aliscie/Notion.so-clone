@@ -4,8 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 
 const useStyles = makeStyles((theme) => ({
       button: {
@@ -37,21 +35,18 @@ function Selection() {
       const FilterSearch = options.filter(option => {
             return option.name.toLowerCase().includes(search.toLowerCase())
       })
-      console.log(...FilterSearch)
+
       return (
             <div>
                   <input onChange={e => setSearch(e.target.value)} placeholder='for examle todo' className='PopSearchINput' />
-                  {FilterSearch.map((Option) => (
-                        <List component="nav" aria-label="main mailbox folders">
-                              <ListItem button>
-                                    <ListItemIcon>
-                                          <Option.icon />
-                                    </ListItemIcon>
+                  <List component="nav" aria-label="main mailbox folders">
+                        {FilterSearch.map((Option) => (
+                              <ListItem key={Option.name} button>
                                     <ListItemText primary={Option.name} />
                               </ListItem>
-                        </List>
-                  ))
-                  }
+                        ))
+                        }
+                  </List>
             </div>
       )
 }
