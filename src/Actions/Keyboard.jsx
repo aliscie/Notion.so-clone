@@ -33,7 +33,7 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
                   set((pre) => {
                         return [
                               ...pre.slice(0, index + 1),
-                              { id: state.length + 1, text: null, style: { color: 'gray' }, checkBox: (state[index].checkBox !== null) ? false : null },
+                              { id: state.length + 1, text: null, style: { color: 'black' }, checkBox: (state[index].checkBox !== null) ? false : null },
                               ...pre.slice(index + 1, state.length)
                         ];
                   });
@@ -63,7 +63,7 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
                         suppressContentEditableWarning={true}
                         onKeyUp={handlKey}
                         style={{ ...e.style, ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
-                  //(e.text.lenght<0)&&(inntertext =='att text or hit / to add elment.')+(stle={{color:'gray'}})
+                        placeholder='type or hit command.'
                   >{e.text}</div>
                   <Pop searchValue={searchValue} e={e} anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
                   <input hidden onChange={e => setSearch(e.target.value)} />
