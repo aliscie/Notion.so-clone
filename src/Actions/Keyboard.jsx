@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import CheckBox from '../components/CheckBox'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
-import Pop from '../components/Popover'
+import Text from '../Views/Text'
+import Table from '../Views/Table'
 
-function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl }) {
+function Keyboard({ View, isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl, Indexing }) {
       const [mouseIsOver, SetIsOver] = useState(false)
       const [searchValue, setSearch] = useState('')
       function handlKey(e) {
@@ -53,20 +53,9 @@ function Keyboard({ isDragging, state, set, e, setAnchorEl, elementsStyle, ancho
       }
 
       return (
-            <div style={{ opacity: isDragging ? '0.2' : '1' }} onMouseOver={() => SetIsOver(true)} onMouseLeave={() => SetIsOver(false)}>
-                  <DragIndicatorIcon style={{ opacity: mouseIsOver ? '1' : '0' }} />
-                  <CheckBox e={e} />
-                  <div
-                        placeholder='placeholder'
-                        id={e.id}
-                        contentEditable='true'
-                        suppressContentEditableWarning={true}
-                        onKeyUp={handlKey}
-                        style={{ ...e.style, ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
-                        placeholder='type or hit command.'
-                  >{e.text}</div>
-                  <Pop searchValue={searchValue} e={e} anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
-                  <input hidden onChange={e => setSearch(e.target.value)} />
+            <div>
+                  {View == 'Text' && <Text setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} handlKey={handlKey} e={e} isDragging={isDragging} SetIsOver={SetIsOver} DragIndicatorIcon={DragIndicatorIcon} mouseIsOver={mouseIsOver} />}
+                  {View == 'Table' && <Table Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} handlKey={handlKey} e={e} isDragging={isDragging} SetIsOver={SetIsOver} DragIndicatorIcon={DragIndicatorIcon} mouseIsOver={mouseIsOver} />}
             </div>
       )
 }

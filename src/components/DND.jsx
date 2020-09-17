@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Keyboard from '../Actions/Keyboard';
 const grid = 8
 
-function DND({ elements, boxStyle, elementsStyle }) {
+function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
 
       const [state, set] = useState(elements)
       const [anchorEl, setAnchorEl] = useState(null);
@@ -11,7 +11,7 @@ function DND({ elements, boxStyle, elementsStyle }) {
       function Drag() {
 
             return (
-                  <div>
+                  <div style={{ display: display }}>
                         {state.map((e, index) => (
                               <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
                                     {(provided, snapshot) => (
@@ -19,15 +19,9 @@ function DND({ elements, boxStyle, elementsStyle }) {
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
-                                          // style={{
-                                          //       padding: grid,
-                                          //       overflow: 'auto',
-                                          //       ...provided.draggableProps.style,
-
-                                          // }}
                                           >
                                                 <div>
-                                                      <Keyboard isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                                      <Keyboard View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                 </div>
                                           </div>
                                     )}
@@ -38,7 +32,7 @@ function DND({ elements, boxStyle, elementsStyle }) {
       }
       function Drop() {
             return (
-                  <Droppable droppableId='droppable'>
+                  <Droppable droppableId='droppable' direction={direction}>
                         {(provided, snapshot) => (
                               <div
                                     ref={provided.innerRef}
