@@ -13,26 +13,32 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
             return (
                   <div style={{ display: display }}>
                         {state.map((e, index) => (
-                              <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
-                                    {(provided, snapshot) => (
-                                          <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                          >
-                                                <div>
-                                                      <Keyboard View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
-                                                </div>
-                                          </div>
-                                    )}
-                              </Draggable>
+                              <div>{
+                                    e.type == 'column' && <Keyboard View={View} Indexing={index} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                              }
+                                    {
+                                          e.type !== 'column' && <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
+                                                {(provided, snapshot) => (
+                                                      <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                      >
+                                                            <div>
+                                                                  <Keyboard View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                                            </div>
+                                                      </div>
+                                                )}
+                                          </Draggable>
+                                    }
+                              </div>
                         ))}
                   </div>
             )
       }
       function Drop() {
             return (
-                  <Droppable droppableId='droppable' direction={direction}>
+                  <Droppable droppableId='droppable' direction={direction} >
                         {(provided, snapshot) => (
                               <div
                                     ref={provided.innerRef}
@@ -46,8 +52,9 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                                     {Drag(boxStyle, elementsStyle)}
                                     {provided.placeholder}
                               </div>
-                        )}
-                  </Droppable>
+                        )
+                        }
+                  </Droppable >
             )
       }
 

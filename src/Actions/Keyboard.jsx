@@ -3,11 +3,10 @@ import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 import Text from '../Views/Text'
 import Table from '../Views/Table'
 import TableH from '../Views/TableH'
-function Keyboard({ View, isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl, Indexing }) {
+function Keyboard({ elements, View, isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl, Indexing }) {
       const [mouseIsOver, SetIsOver] = useState(false)
       const [searchValue, setSearch] = useState('')
       function handlKey(e) {
-
             const index = state.findIndex((item) => `${item.id}` == e.target.id);
 
             // let x = state
@@ -56,7 +55,7 @@ function Keyboard({ View, isDragging, state, set, e, setAnchorEl, elementsStyle,
             <div>
                   {View == 'Text' && <Text setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} handlKey={handlKey} e={e} isDragging={isDragging} SetIsOver={SetIsOver} DragIndicatorIcon={DragIndicatorIcon} mouseIsOver={mouseIsOver} />}
                   {View == 'Table' && <Table Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} handlKey={handlKey} e={e} isDragging={isDragging} SetIsOver={SetIsOver} DragIndicatorIcon={DragIndicatorIcon} mouseIsOver={mouseIsOver} />}
-                  {View == 'TableH' && <TableH Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} handlKey={handlKey} e={e} isDragging={isDragging} SetIsOver={SetIsOver} DragIndicatorIcon={DragIndicatorIcon} mouseIsOver={mouseIsOver} />}
+                  {View == 'TableH' && <TableH set={set} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} handlKey={handlKey} e={e} isDragging={isDragging} SetIsOver={SetIsOver} DragIndicatorIcon={DragIndicatorIcon} mouseIsOver={mouseIsOver} />}
             </div>
       )
 }
