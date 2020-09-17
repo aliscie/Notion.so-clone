@@ -1,5 +1,5 @@
 import React from 'react'
-
+let thelement = null
 function handlKey(e, state, set, setAnchorEl) {
       const index = state.findIndex((item) => `${item.id}` == e.target.id);
 
@@ -41,7 +41,9 @@ function handlKey(e, state, set, setAnchorEl) {
             // e.target.innerText = e.target.innerText.split('\n').join('')
             setAnchorEl(e.currentTarget)
             // console.log(document.getElementById('searchValue').focus())
+            thelement = e.target
       }
 }
 
 export default handlKey
+export { thelement }
