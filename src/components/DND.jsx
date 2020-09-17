@@ -13,8 +13,8 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
             return (
                   <div style={{ display: display }}>
                         {state.map((e, index) => (
-                              <div>{
-                                    e.type == 'column' && <Keyboard View={View} Indexing={index} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                              <div key={index}>{
+                                    e.type === 'column' && <Keyboard View={View} Indexing={index} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                               }
                                     {
                                           e.type !== 'column' && <Draggable key={`${index}`} draggableId={`${index}`} index={index} >

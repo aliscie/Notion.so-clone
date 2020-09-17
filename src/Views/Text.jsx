@@ -8,7 +8,6 @@ function Text({ e, isDragging, SetIsOver, DragIndicatorIcon, mouseIsOver, handlK
                   <DragIndicatorIcon style={{ opacity: mouseIsOver ? '1' : '0' }} />
                   <CheckBox e={e} />
                   <div
-                        placeholder='placeholder'
                         id={e.id}
                         contentEditable='true'
                         suppressContentEditableWarning={true}
