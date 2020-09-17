@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-function Selection() {
+function Selection({ mentE, Indexing, element, state, set }) {
       const [search, setSearch] = useState('')
-
 
       const options = [{ name: 'xxxxx', icon: 'InboxIcon' }, { name: 'checkbox', icon: 'InboxIcon' }, { name: 'image', icon: 'InboxIcon' }]
       const FilterSearch = options.filter(option => {
             return option.name.toLowerCase().includes(search.toLowerCase())
       })
 
+      function handlChoose(e) {
+            // if (e.target.innerText === 'xxxxx') {
+            //       console.log(Index)
+            // }
+            // console.log(mentE)
+
+
+      }
+      function handlChoose2(e) {
+            // e.key == 'Enter' && console.log(FilterSearch[0].name)
+      }
       return (
             <div>
-                  <input onChange={e => setSearch(e.target.value)} placeholder='for examle todo' className='PopSearchINput' />
+                  <input onKeyPress={handlChoose2} onChange={e => setSearch(e.target.value)} placeholder='for examle todo' className='PopSearchINput' />
                   <List component="nav" aria-label="main mailbox folders">
                         {FilterSearch.map((Option) => (
                               <ListItem key={Option.name} button>
-                                    <ListItemText primary={Option.name} />
+                                    <ListItemText onClick={handlChoose} primary={Option.name} />
                               </ListItem>
                         ))
                         }

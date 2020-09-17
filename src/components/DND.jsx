@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import Keyboard from '../Actions/Keyboard';
+import Components from '../Actions/Components';
 const grid = 8
 
 function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
@@ -14,7 +14,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                   <div style={{ display: display }}>
                         {state.map((e, index) => (
                               <div key={index}>{
-                                    e.type === 'column' && <Keyboard View={View} Indexing={index} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                    e.type === 'column' && <Components View={View} Indexing={index} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                               }
                                     {
                                           e.type !== 'column' && <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
@@ -25,7 +25,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                                                             {...provided.dragHandleProps}
                                                       >
                                                             <div>
-                                                                  <Keyboard View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                                                  <Components View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                             </div>
                                                       </div>
                                                 )}
