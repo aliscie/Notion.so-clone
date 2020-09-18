@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 import Text from '../Views/Text'
 import Table from '../Views/Table'

@@ -2,14 +2,14 @@ import React from 'react'
 import Overlay from "react-bootstrap/Overlay";
 import Selection from '../components/Selection'
 
-function Pop({ setShow, target, show, state, set, mentE }) {
+function Pop({ pinterPosition, setShow, target, show, state, set, mentE }) {
+
       return (
             <Overlay
-                  // onExit={() => setShow(false)}
-                  ref={target}
+                  // ref={target}
                   target={target.current}
                   show={show}
-                  placement="right-start"
+                  position
             >
                   {({ placement, arrowProps, show: _show, popper, ...props }) => (
                         <div
@@ -18,10 +18,13 @@ function Pop({ setShow, target, show, state, set, mentE }) {
                                     backgroundColor: "rgba(140, 140, 140, 0.85)",
                                     color: "black",
                                     borderRadius: 3,
-                                    ...props.style
+                                    // ...props.style,
+                                    top: `${pinterPosition.Y}px`,
+                                    left: `${pinterPosition.X}px`,
+                                    position: 'absolute'
                               }}
                         >
-                              <div onMouseLeave={() => setShow(false)} >
+                              <div  >
                                     <Selection setShow={setShow} mentE={mentE} state={state} set={set} />
                               </div>
                         </div>

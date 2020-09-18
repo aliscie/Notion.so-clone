@@ -1,8 +1,7 @@
-import React from 'react'
-let thelement = null
+let thelement
+let position
 function handlKey(e, state, set, setAnchorEl, setShow) {
       const index = state.findIndex((item) => `${item.id}` == e.target.id);
-
       // let x = state
       // const foundE = state.find(({ id }) => `${id}` === e.target.id)
       // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
@@ -38,10 +37,10 @@ function handlKey(e, state, set, setAnchorEl, setShow) {
       }
 
       if (e.keyCode == 18) {
-            if ((e) => e.key === "Alt") { setShow((pre) => !pre) }
             thelement = e.target
+            if ((e) => e.key === "Alt") { setShow((pre) => !pre) }
       }
 }
 
 export default handlKey
-export { thelement }
+export { thelement, position }
