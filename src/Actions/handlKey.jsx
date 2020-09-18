@@ -1,6 +1,6 @@
 import React from 'react'
 let thelement = null
-function handlKey(e, state, set, setAnchorEl) {
+function handlKey(e, state, set, setAnchorEl, setShow) {
       const index = state.findIndex((item) => `${item.id}` == e.target.id);
 
       // let x = state
@@ -38,9 +38,7 @@ function handlKey(e, state, set, setAnchorEl) {
       }
 
       if (e.keyCode == 18) {
-            // e.target.innerText = e.target.innerText.split('\n').join('')
-            setAnchorEl(e.currentTarget)
-            // console.log(document.getElementById('searchValue').focus())
+            if ((e) => e.key === "Alt") { setShow((pre) => !pre) }
             thelement = e.target
       }
 }

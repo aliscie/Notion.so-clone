@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import CheckBox from '../components/CheckBox'
-import Pop from '../components/Popover'
 import handlKey from '../Actions/handlKey'
-
+import Pop from '../components/Pop'
 function Text({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseIsOver, elementsStyle, searchValue, anchorEl, setAnchorEl, setSearch }) {
       const [mentE, setMentE] = useState(null)
+      const [show, setShow] = useState(false);
+      const target = useRef(null);
+
       function handlId(e) {
             setMentE(e)
       }
@@ -17,13 +19,14 @@ function Text({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseIs
                         id={e.id}
                         contentEditable='true'
                         suppressContentEditableWarning={true}
-                        onKeyUp={(e) => handlKey(e, state, set, setAnchorEl)}
+                        onKeyUp={(e) => handlKey(e, state, set, setAnchorEl, setShow)}
                         onKeyDown={handlId}
                         style={{ ...e.style, ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
                         placeholder='type or hit command.'
+                        ref={target}
 
                   >{e.text}</div>
-                  <Pop mentE={mentE} element={e} state={state} set={set} searchValue={searchValue} e={e} anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                  <Pop setShow={setShow} state={state} set={set} mentE={mentE} show={show} target={target} />
                   <input hidden onChange={e => setSearch(e.target.value)} />
             </div>
       )
