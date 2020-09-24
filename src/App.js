@@ -8,7 +8,6 @@ function App() {
       return (
             <div>
                   <DND View={'Text'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{ background: 'white' }} elements={elements} />
-                  <DND View={'Table'} display={'flex'} direction={"horizontal"} boxStyle={{ background: 'white' }} elementsStyle={{ background: 'white' }} elements={table} />
                   <DND View={'TableH'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{ background: 'white' }} elements={table2} />
             </div>
 
