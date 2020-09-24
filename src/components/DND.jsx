@@ -1,6 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Components from '../Actions/Components';
+
 const grid = 8
 
 function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
@@ -63,21 +65,21 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
 
 
       function DragH() {
-            if (columns.length[0]) {
+            useEffect(() => {
                   setC(pre => {
-                        let table2 = []
-                        for (let i = 0; i < pre[0].row.length; i++) {
-                              let intial = []
-                              pre.map(r => intial.push(r.row[i]))
-                              table2.splice(i, 0, { id: i, row: intial })
-                              console.log(table2)
+                        let table3 = []
+                        if (pre[0].row) {
+                              for (let i = 0; i < pre[0].row.length; i++) {
+                                    let intial = []
+                                    intial.push(pre[0].row[i])
+                                    table3.splice(i, 0, { id: i, row: intial })
 
+                              }
                         }
-                        return table2
+                        return table3
                   })
-            }
 
-
+            }, [])
 
 
             return (
@@ -85,7 +87,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                         {columns.map((e, index) => (
                               <div key={index}>
                                     {
-                                          e.type === 'column' && <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
+                                          <Draggable key={`${index}`} draggableId={`${index}`} index={index} >
                                                 {(provided, snapshot) => (
                                                       <div
                                                             ref={provided.innerRef}
@@ -133,6 +135,26 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
             setTimeout(() => {
                   setC(x)
             }, 0)
+            console.log(r.source.index, r.destination.index)
+            // convert 1
+            const y = state
+            let table3 = []
+            for (let i = 0; i < state[0].row.length; i++) {
+                  let intial = []
+                  state.map(r => intial.push(r.row[i]))
+                  table3.splice(i, 0, { id: i, row: intial })
+            }
+            console.log(table3)
+            // convert 2
+            let table2 = []
+            for (let i = 0; i < table3[0].row.length; i++) {
+                  let intial = []
+                  table3.map(r => intial.push(r.row[i]))
+                  table2.splice(i, 0, { id: i, row: intial })
+            }
+            console.log(table2)
+
+
       }
 
       function reOrder(r) {
