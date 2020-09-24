@@ -22,7 +22,7 @@ function Text({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseIs
                         suppressContentEditableWarning={true}
                         onKeyUp={(e) => handlKey(e, state, set, setAnchorEl, setShow)}
                         onKeyDown={handlId}
-                        style={{ ...e.style, ...elementsStyle, width: '100%', outline: 'none', display: 'inline' }}
+                        style={{ ...e.style, ...elementsStyle, width: '100%', display: 'inline' }}
                         placeholder='type or hit command.'
                         onClick={e => setPoin({ X: e.clientX, Y: e.clientY })}
                   >{e.text}</div>

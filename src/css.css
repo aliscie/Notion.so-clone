@@ -1,4 +1,11 @@
 [contenteditable=true]:empty:before {
       content: attr(placeholder);
-      color:gray
+      color:gray;
+      outline: none;
+
+    }
+
+[contenteditable=true]{
+  outline: none;
+  cursor: auto;
     }

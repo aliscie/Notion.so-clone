@@ -72,7 +72,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                               for (let i = 0; i < pre[0].row.length; i++) {
                                     let intial = []
                                     intial.push(pre[0].row[i])
-                                    table3.splice(i, 0, { id: i, row: intial })
+                                    table3.splice(i, 0, { id: i, row: intial, type: 'column' })
 
                               }
                         }
@@ -142,11 +142,10 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
             let table3 = []
             for (let i = 0; i < y[0].row.length; i++) {
                   let intial = []
-                  y.map(r => {
-
+                  y.map(r => (
                         r.type !== 'column' && intial.push(r.row[i])
-                  })
-                  table3.splice(i, 0, { id: i, row: intial })
+                  ))
+                  table3.splice(i, 0, { id: i, row: intial, type: 'row' })
             }
 
             // console.log(table3)
@@ -160,7 +159,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
             for (let i = 0; i < table3[0].row.length; i++) {
                   let intial = []
                   table3.map(r => intial.push(r.row[i]))
-                  table2.splice(i, 0, { id: i, row: intial })
+                  table2.splice(i, 0, { id: i, row: intial, type: 'row' })
             }
             // console.log(table2)
 
