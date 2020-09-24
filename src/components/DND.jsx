@@ -135,25 +135,39 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
             setTimeout(() => {
                   setC(x)
             }, 0)
-            console.log(r.source.index, r.destination.index)
+            // console.log(r.source.index, r.destination.index)
+
             // convert 1
             const y = state
             let table3 = []
-            for (let i = 0; i < state[0].row.length; i++) {
+            for (let i = 0; i < y[0].row.length; i++) {
                   let intial = []
-                  state.map(r => intial.push(r.row[i]))
+                  y.map(r => {
+
+                        r.type !== 'column' && intial.push(r.row[i])
+                  })
                   table3.splice(i, 0, { id: i, row: intial })
             }
-            console.log(table3)
-            // convert 2
+
+            // console.log(table3)
+            //update 
+            const [removed2] = table3.splice(r.source.index, 1);
+            table3.splice(r.destination.index, 0, removed2);
+            // console.log(table3)
+
+            //convert 2
             let table2 = []
             for (let i = 0; i < table3[0].row.length; i++) {
                   let intial = []
                   table3.map(r => intial.push(r.row[i]))
                   table2.splice(i, 0, { id: i, row: intial })
             }
-            console.log(table2)
+            // console.log(table2)
 
+            //applay
+            setTimeout(() => {
+                  set(table2)
+            }, 0)
 
       }
 
