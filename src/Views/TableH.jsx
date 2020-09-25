@@ -5,6 +5,8 @@ function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseI
       const ref = useRef()
       function hanldKeyup(event) {
             const index = state.findIndex((item) => `${item.row}` == event.target.id);
+            const subIndex = state[index].row.findIndex((item) => item == event.target.className);
+
             if (event.keyCode == 13) {
                   event.preventDefault()
                   event.target.innerText = event.target.innerText.split('\n').join('')
@@ -16,18 +18,16 @@ function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseI
                         ];
                   });
             }
-            setTimeout(() => {
-                  // document.getElementById('name,100,@bla bla').focus();
-            }, 0);
 
-            //live update.
-            // let x = state
-            // const foundE = state.find(({ id }) => `${id}` === e.target.id)
-            // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
-            // Object.assign(foundE, updatedE)
-            // set(x)
+            if (event.keyCode != 13) {
+                  var x = state
+                  x[index].row[subIndex] = event.target.innerText
+                  set(x)
+            }
 
       }
+
+
 
       return (
             <div
@@ -49,7 +49,7 @@ function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseI
                               style={{ padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
 
                         >
-                              <div ref={ref} id={e.row} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >{cell}</div>
+                              <div ref={ref} id={e.row} className={cell} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >{cell}</div>
                         </div>
                   ))}
 
