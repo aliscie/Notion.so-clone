@@ -5,7 +5,7 @@ import Components from '../Actions/Components';
 
 const grid = 8
 
-function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
+function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elementsStyle, display, direction }) {
 
       const [state, set] = useState(elements)
       const [columns, setC] = useState(elements)
@@ -27,7 +27,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                                                             {...provided.dragHandleProps}
                                                       >
                                                             <div>
-                                                                  <Components View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                                                  <Components setAnchorEl2={setAnchorEl2} setChoose={setChoose} View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                             </div>
                                                       </div>
                                                 )}
@@ -48,7 +48,7 @@ function DND({ View, elements, boxStyle, elementsStyle, display, direction }) {
                                           padding: grid,
                                           paddingTop: '0',
                                           overflow: 'auto',
-                                          height: '300px',
+                                          height: height,
                                           ...boxStyle
                                     }}
                               >
