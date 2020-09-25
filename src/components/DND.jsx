@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Components from '../Actions/Components';
 
+
 const grid = 8
 
 function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elementsStyle, display, direction }) {
@@ -24,11 +25,9 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                                                       <div
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
+
                                                       >
-                                                            <div>
-                                                                  <Components setAnchorEl2={setAnchorEl2} setChoose={setChoose} View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
-                                                            </div>
+                                                            <Components dragable={provided.dragHandleProps} setAnchorEl2={setAnchorEl2} setChoose={setChoose} View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                       </div>
                                                 )}
                                           </Draggable>
@@ -83,7 +82,7 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
 
 
             return (
-                  <div style={{ display: 'flex' }}>
+                  <div style={{ display: 'flex', marginLeft: '24px' }}>
                         {columns.map((e, index) => (
                               <div key={index}>
                                     {
@@ -94,9 +93,7 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                       >
-                                                            <div>
-                                                                  <Components View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
-                                                            </div>
+                                                            <Components View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                       </div>
                                                 )}
                                           </Draggable>

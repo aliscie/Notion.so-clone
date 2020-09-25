@@ -1,12 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import { ListNested } from 'react-bootstrap-icons';
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
-function Table({ state, set, e }) {
+function Table({ dragable, state, set, e }) {
+      const [isover, setIsover] = useState(false)
 
       function hanldKeyup(event) {
             const index = state.findIndex((item) => `${item.row}` == event.target.id);
 
-            if (event.keyCode === 13) {
+            if (event.keyCode == 13) {
                   event.preventDefault()
                   event.target.innerText = event.target.innerText.split('\n').join('')
                   set((pre) => {
@@ -19,16 +21,10 @@ function Table({ state, set, e }) {
             }
 
             if (event.keyCode !== 13) {
-
                   e.row[event.target.className] = event.target.innerText
-                  console.log(state)
-                  // console.log(state[index].row[subIndex])
-                  // console.log(e.row[subIndex])
-                  // console.log(event.target.innerText)
             }
 
       }
-
 
 
       return (
@@ -40,22 +36,31 @@ function Table({ state, set, e }) {
                               style={{ color: '#AFAEAC', padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
                         >
                               <ListNested />
-                              {' '}
                               <div suppressContentEditableWarning={true} contentEditable style={{ display: 'inline' }}>{cell}</div>
                         </div>
                   ))}
 
-                  {e.type !== 'column' && e.row.map((cell, index) => (
-                        <div
-                              key={cell}
-                              style={{ padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
+                  <div onMouseOver={() => setIsover(true)} onMouseLeave={() => setIsover(false)}>
 
-                        >
-                              <div id={e.row} className={index} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >
-                                    {cell}
+                        {e.type !== 'column' && <div
+                              style={{ display: 'inline', opacity: isover ? '1' : '0' }}
+                              {...dragable}>
+                              <DragIndicatorIcon />
+                        </div>}
+                        {e.type !== 'column' && e.row.map((cell, index) => (
+                              <div
+
+                                    key={cell}
+                                    style={{ padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
+
+                              >
+
+                                    <div id={e.row} className={index} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >
+                                          {cell}
+                                    </div>
                               </div>
-                        </div>
-                  ))}
+                        ))}
+                  </div>
 
 
             </div>
