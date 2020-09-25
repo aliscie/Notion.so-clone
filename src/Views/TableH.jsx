@@ -17,9 +17,15 @@ function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseI
                   });
             }
             setTimeout(() => {
-                  document.getElementById('name,100,@bla bla').focus();
+                  // document.getElementById('name,100,@bla bla').focus();
             }, 0);
 
+            //live update.
+            // let x = state
+            // const foundE = state.find(({ id }) => `${id}` === e.target.id)
+            // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
+            // Object.assign(foundE, updatedE)
+            // set(x)
 
       }
 

@@ -2,13 +2,12 @@ let thelement
 let position
 function handlKey(e, state, set, setAnchorEl, setShow) {
       const index = state.findIndex((item) => `${item.id}` == e.target.id);
-      // let x = state
-      // const foundE = state.find(({ id }) => `${id}` === e.target.id)
-      // const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
-      // Object.assign(foundE, updatedE)
-      // console.log(x)
-      // set(x)
-      // console.log(state)
+      let x = state
+      const foundE = state.find(({ id }) => `${id}` === e.target.id)
+      const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
+      Object.assign(foundE, updatedE)
+      set(x)
+
       if (e.target.innerText.length == 0) {
             if (e.keyCode == 8) {
                   set((pre) => {
