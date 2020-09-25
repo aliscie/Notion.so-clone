@@ -1,13 +1,12 @@
 import React, { useRef } from 'react'
 import { ListNested } from 'react-bootstrap-icons';
 
-function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseIsOver, handlKey, elementsStyle, searchValue, anchorEl, setAnchorEl, setSearch, Indexing }) {
-      const ref = useRef()
+function Table({ state, set, e }) {
+
       function hanldKeyup(event) {
             const index = state.findIndex((item) => `${item.row}` == event.target.id);
-            const subIndex = state[index].row.findIndex((item) => item == event.target.className);
 
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                   event.preventDefault()
                   event.target.innerText = event.target.innerText.split('\n').join('')
                   set((pre) => {
@@ -19,10 +18,13 @@ function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseI
                   });
             }
 
-            if (event.keyCode != 13) {
-                  var x = state
-                  x[index].row[subIndex] = event.target.innerText
-                  set(x)
+            if (event.keyCode !== 13) {
+
+                  e.row[event.target.className] = event.target.innerText
+                  console.log(state)
+                  // console.log(state[index].row[subIndex])
+                  // console.log(e.row[subIndex])
+                  // console.log(event.target.innerText)
             }
 
       }
@@ -43,13 +45,15 @@ function Table({ state, set, e, isDragging, SetIsOver, DragIndicatorIcon, mouseI
                         </div>
                   ))}
 
-                  {e.type !== 'column' && e.row.map(cell => (
+                  {e.type !== 'column' && e.row.map((cell, index) => (
                         <div
                               key={cell}
                               style={{ padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
 
                         >
-                              <div ref={ref} id={e.row} className={cell} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >{cell}</div>
+                              <div id={e.row} className={index} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >
+                                    {cell}
+                              </div>
                         </div>
                   ))}
 
