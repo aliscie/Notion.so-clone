@@ -168,6 +168,8 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                   pre.splice(r.destination.index, 0, removed);
                   return pre
             })
+            //this works very well.
+            console.log(state)
       }
       return (
             <div>
