@@ -126,54 +126,48 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
       }
 
       function reOrderH(r) {
-            const x = columns
-            const [removed] = x.splice(r.source.index, 1);
-            x.splice(r.destination.index, 0, removed);
-            setTimeout(() => {
-                  setC(x)
-            }, 0)
-            // console.log(r.source.index, r.destination.index)
+            setC(pre => {
+                  const [removed] = pre.splice(r.source.index, 1);
+                  pre.splice(r.destination.index, 0, removed)
+                  return pre
+            })
 
-            // convert 1
-            const y = state
-            let table3 = []
-            for (let i = 0; i < y[0].row.length; i++) {
-                  let intial = []
-                  y.map(r => (
-                        r.type !== 'column' && intial.push(r.row[i])
-                  ))
-                  table3.splice(i, 0, { id: i, row: intial, type: 'row' })
-            }
+            set(pre => {
+                  //convert data to vertical
+                  let table3 = []
+                  for (let i = 0; i < pre[0].row.length; i++) {
+                        let intial = []
+                        pre.map(r => (
+                              r.type !== 'column' && intial.push(r.row[i])
+                        ))
+                        table3.splice(i, 0, { id: i, row: intial, type: 'row' })
+                  }
+                  // reorder
+                  const [removed2] = table3.splice(r.source.index, 1);
+                  table3.splice(r.destination.index, 0, removed2);
 
-            // console.log(table3)
-            //update 
-            const [removed2] = table3.splice(r.source.index, 1);
-            table3.splice(r.destination.index, 0, removed2);
-            // console.log(table3)
-
-            //convert 2
-            let table2 = []
-            for (let i = 0; i < table3[0].row.length; i++) {
-                  let intial = []
-                  table3.map(r => intial.push(r.row[i]))
-                  table2.splice(i, 0, { id: i, row: intial, type: 'row' })
-            }
-            // console.log(table2)
-
-            //applay
-            setTimeout(() => {
-                  set(table2)
-            }, 0)
+                  //convert 2
+                  let table2 = []
+                  for (let i = 0; i < table3[0].row.length; i++) {
+                        let intial = []
+                        table3.map(r => intial.push(r.row[i]))
+                        table2.splice(i, 0, { id: i, row: intial, type: 'row' })
+                  }
+                  pre = table2
+                  return pre
+            })
+            //state don't convert?
+            console.log(state)
+            // console.log(columns)
 
       }
 
       function reOrder(r) {
-            const x = state
-            const [removed] = x.splice(r.source.index, 1);
-            x.splice(r.destination.index, 0, removed);
-            setTimeout(() => {
-                  set(x)
-            }, 0)
+            set(pre => {
+                  const [removed] = pre.splice(r.source.index, 1);
+                  pre.splice(r.destination.index, 0, removed);
+                  return pre
+            })
       }
       return (
             <div>

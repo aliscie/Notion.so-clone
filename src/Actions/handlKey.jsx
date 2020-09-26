@@ -2,7 +2,11 @@ let thelement
 let position
 function handlKey(event, e, state, set, setAnchorEl, setShow) {
       const index = state.findIndex((item) => `${item.id}` == event.target.id);
-      e.text = event.target.innerHTML
+      set(pre => {
+            pre[index].text = event.target.innerText
+            return pre
+      })
+
 
       if (event.target.innerText.length == 0) {
             if (event.keyCode == 8) {

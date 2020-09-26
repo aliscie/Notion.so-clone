@@ -13,7 +13,6 @@ function Form({ dragable, state, set, e }) {
                   {e.type === 'column' && <div>
                         <input id={e.row} onKeyUp={handlKeyUp} placeholder={e.row} />
                   </div>}
-
             </div>
       )
 }
