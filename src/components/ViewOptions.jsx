@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import MenuItem from '@material-ui/core/MenuItem';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
-function ViewOptions({ dragable, e, Views, setChoose, setAnchorEl2, anchorEl }) {
+function ViewOptions({ dragable, e, setChoose, setAnchorEl2, anchorEl }) {
       const [isover, setIsover] = useState(false)
 
 

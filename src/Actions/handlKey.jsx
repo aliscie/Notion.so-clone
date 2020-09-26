@@ -1,15 +1,11 @@
 let thelement
 let position
-function handlKey(e, state, set, setAnchorEl, setShow) {
-      const index = state.findIndex((item) => `${item.id}` == e.target.id);
-      let x = state
-      const foundE = state.find(({ id }) => `${id}` === e.target.id)
-      const updatedE = { id: parseInt(e.target.id), text: e.target.innerText }
-      Object.assign(foundE, updatedE)
-      set(x)
+function handlKey(event, e, state, set, setAnchorEl, setShow) {
+      const index = state.findIndex((item) => `${item.id}` == event.target.id);
+      e.text = event.target.innerHTML
 
-      if (e.target.innerText.length == 0) {
-            if (e.keyCode == 8) {
+      if (event.target.innerText.length == 0) {
+            if (event.keyCode == 8) {
                   set((pre) => {
                         return [
                               ...pre.slice(0, index),
@@ -19,8 +15,8 @@ function handlKey(e, state, set, setAnchorEl, setShow) {
             }
 
       }
-      if (e.keyCode == 13) {
-            e.target.innerText = e.target.innerText.split('\n').join('')
+      if (event.keyCode == 13) {
+            event.target.innerText = event.target.innerText.split('\n').join('')
             set((pre) => {
                   return [
                         ...pre.slice(0, index + 1),
@@ -35,9 +31,9 @@ function handlKey(e, state, set, setAnchorEl, setShow) {
             }, 0);
       }
 
-      if (e.keyCode == 18) {
-            thelement = e.target
-            if ((e) => e.key === "Alt") { setShow((pre) => !pre) }
+      if (event.keyCode == 18) {
+            thelement = event.target
+            if ((e) => event.key === "Alt") { setShow((pre) => !pre) }
       }
 }
 

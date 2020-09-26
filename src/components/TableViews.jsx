@@ -6,7 +6,7 @@ let table2 = [{ id: 0, row: ['names', 'ages', 'emails'], type: 'column' }, { id:
 const viewOptions = ['Defualt', 'Form', 'Chart']
 function TableViews() {
 
-      const [choose, setChoose] = useState('View')
+      const [choose, setChoose] = useState('Defualt')
       const [anchorEl, setAnchorEl] = useState(null);
       const handleClose = (e) => {
             setAnchorEl(null);
@@ -25,7 +25,9 @@ function TableViews() {
                   >
                         <DND setAnchorEl2={setAnchorEl} setChoose={setChoose} View={'Views'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={viewOptions} />
                   </Menu>
-                  <DND View={'TableH'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={table2} />
+                  {choose === 'Defualt' && <DND View={'TableH'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={table2} />}
+                  {choose === 'Form' && <DND View={'Form'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={table2} />}
+
             </div>
       )
 }

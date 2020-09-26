@@ -22,17 +22,17 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
                         <DragIndicatorIcon />
                   </div>
                   <CheckBox e={e} />
+
                   <div
                         id={e.id}
                         ref={target}
                         contentEditable='true'
                         suppressContentEditableWarning={true}
-                        onKeyUp={(e) => handlKey(e, state, set, setAnchorEl, setShow)}
+                        onKeyUp={(event) => handlKey(event, e, state, set, setAnchorEl, setShow)}
                         onKeyDown={handlId}
                         style={{ ...e.style, ...elementsStyle, width: '100%', display: 'inline' }}
                         placeholder='type or hit command.'
                         onClick={e => setPoin({ X: e.clientX, Y: e.clientY })}
-
                   >{e.text}</div>
                   <Pop pinterPosition={pinterPosition} setShow={setShow} state={state} set={set} mentE={mentE} show={show} target={target} />
             </div >
