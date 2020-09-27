@@ -25,7 +25,7 @@ function Pop({ pinterPosition, setShow, target, show, state, set, mentE }) {
                               }}
                         >
                               <div  >
-                                    <Selection setShow={setShow} mentE={mentE} state={state} set={set} />
+                                    <Selection target={target} setShow={setShow} mentE={mentE} state={state} set={set} />
                               </div>
                         </div>
                   )}

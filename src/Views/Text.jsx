@@ -5,6 +5,7 @@ import Pop from '../components/Pop'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
 function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, searchValue, anchorEl, setAnchorEl, setSearch }) {
+
       const [mentE, setMentE] = useState(null);
       const [show, setShow] = useState(false);
       const [pinterPosition, setPoin] = useState(false);
@@ -13,8 +14,8 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
       function handlId(e) {
             setMentE(e)
       }
+
       function handlIconClick(event) {
-            console.log(e)
             setPoin({ X: event.clientX + 10, Y: event.clientY })
             setShow((pre) => !pre)
       }
@@ -31,7 +32,7 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
                         </div>
                         <CheckBox e={e} />
                   </div>
-                  { e.image && <img src={e.image} />}
+                  { e.image && <img ref={target} id={e.id} src={e.image} />}
                   {
                         !e.image && <div
                               id={e.id}
@@ -45,7 +46,7 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
                               onClick={e => setPoin({ X: e.clientX, Y: e.clientY })}
                         >{e.text}</div>
                   }
-                  <Pop pinterPosition={pinterPosition} setShow={setShow} state={state} set={set} mentE={mentE} show={show} target={target} />
+                  <Pop theE={target.current} pinterPosition={pinterPosition} setShow={setShow} state={state} set={set} mentE={mentE} show={show} target={target} />
             </div >
       )
 }

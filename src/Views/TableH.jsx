@@ -47,6 +47,7 @@ function Table({ dragable, state, set, e }) {
                               {...dragable}>
                               <DragIndicatorIcon />
                         </div>}
+
                         {e.type !== 'column' && e.row.map((cell, index) => (
                               <div
 

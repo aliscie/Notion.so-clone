@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Chart({ dragable, state, set, e }) {
-      console.log(e.row[0])
+
       return (
             <div>
                   {e.type !== 'column' && <div
