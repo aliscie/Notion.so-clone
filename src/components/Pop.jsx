@@ -9,7 +9,7 @@ function Pop({ pinterPosition, setShow, target, show, state, set, mentE }) {
                   // ref={target}
                   target={target.current}
                   show={show}
-                  position
+
             >
                   {({ placement, arrowProps, show: _show, popper, ...props }) => (
                         <div

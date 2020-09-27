@@ -15,7 +15,7 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
       }
       function handlIconClick(event) {
             console.log(e)
-            //the postion.
+            setPoin({ X: event.clientX + 10, Y: event.clientY })
             setShow((pre) => !pre)
       }
 
