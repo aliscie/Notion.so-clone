@@ -3,6 +3,7 @@ import Text from '../Views/Text'
 import Table from '../Views/TableH'
 import ViewOptions from '../components/ViewOptions'
 import Form from '../Views/Form'
+import Chart from '../Views/Chart'
 
 function Components({ dragable, setOver, setAnchorEl2, setChoose, elements, View, isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl, Indexing }) {
       const [mouseIsOver, SetIsOver] = useState(false)
@@ -19,6 +20,8 @@ function Components({ dragable, setOver, setAnchorEl2, setChoose, elements, View
                         setChoose={setChoose}
                         Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
                   {View === 'Form' && <Form dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
+                  {View === 'Chart' && <Chart dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
+
 
             </div>
       )

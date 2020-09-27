@@ -27,6 +27,7 @@ function TableViews() {
                   </Menu>
                   {choose === 'Defualt' && <DND View={'TableH'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={table2} />}
                   {choose === 'Form' && <DND View={'Form'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={table2} />}
+                  {choose === 'Chart' && <DND View={'Chart'} display={'block'} direction={"vertical"} boxStyle={{ background: 'white' }} elementsStyle={{}} elements={table2} />}
 
             </div>
       )
