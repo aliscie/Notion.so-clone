@@ -13,27 +13,38 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
       function handlId(e) {
             setMentE(e)
       }
+      function handlIconClick(event) {
+            console.log(e)
+            //the postion.
+            setShow((pre) => !pre)
+      }
 
       return (
             <div style={{ opacity: isDragging ? '0.2' : '1' }}
                   onMouseOver={() => setIsover(true)} onMouseLeave={() => setIsover(false)}
             >
-                  <div style={{ display: 'inline', opacity: isover ? '1' : '0' }} {...dragable}>
-                        <DragIndicatorIcon />
-                  </div>
-                  <CheckBox e={e} />
-
                   <div
-                        id={e.id}
-                        ref={target}
-                        contentEditable='true'
-                        suppressContentEditableWarning={true}
-                        onKeyUp={(event) => handlKey(event, e, state, set, setAnchorEl, setShow)}
-                        onKeyDown={handlId}
-                        style={{ ...e.style, ...elementsStyle, width: '100%', display: 'inline' }}
-                        placeholder='type or hit command.'
-                        onClick={e => setPoin({ X: e.clientX, Y: e.clientY })}
-                  >{e.text}</div>
+                        //i want checkbox and dragic to apear on top not in center
+                        style={{ justifySelf: 'top', display: 'inline' }}>
+                        <div onClick={handlIconClick} style={{ display: 'inline', opacity: isover ? '1' : '0' }} {...dragable}>
+                              <DragIndicatorIcon />
+                        </div>
+                        <CheckBox e={e} />
+                  </div>
+                  { e.image && <img src={e.image} />}
+                  {
+                        !e.image && <div
+                              id={e.id}
+                              ref={target}
+                              contentEditable='true'
+                              suppressContentEditableWarning={true}
+                              onKeyUp={(event) => handlKey(event, e, state, set, setAnchorEl, setShow)}
+                              onKeyDown={handlId}
+                              style={{ ...e.style, ...elementsStyle, width: '100%', display: 'inline' }}
+                              placeholder='type or hit command.'
+                              onClick={e => setPoin({ X: e.clientX, Y: e.clientY })}
+                        >{e.text}</div>
+                  }
                   <Pop pinterPosition={pinterPosition} setShow={setShow} state={state} set={set} mentE={mentE} show={show} target={target} />
             </div >
       )

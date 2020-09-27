@@ -21,6 +21,9 @@ function Selection({ setShow, mentE, Indexing, element, state, set }) {
             if (Val === 'checkbox') {
                   state[index].checkBox = false
             }
+            if (Val === 'image') {
+                  state[index].image = 'https://www.gardeningknowhow.com/wp-content/uploads/2017/07/hardwood-tree-400x266.jpg'
+            }
 
       }
       function handlChoose(e) {

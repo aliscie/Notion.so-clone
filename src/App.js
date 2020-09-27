@@ -4,7 +4,7 @@ import TableViews from './components/TableViews'
 import './css.css'
 
 function App() {
-      let elements = [{ id: 0, text: 'first', checkBox: true }, { id: 1, text: 'second', checkBox: false }, { id: 2, text: 'third', checkBox: null }]
+      let elements = [{ id: 0, text: 'first', checkBox: true, image: null }, { id: 1, text: 'second', checkBox: false, image: null }, { id: 2, text: 'third', checkBox: null, image: null }]
 
       return (
             <div>
