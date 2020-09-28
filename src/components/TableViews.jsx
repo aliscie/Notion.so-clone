@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DND from '../components/DND'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-let table2 = [{ id: 0, row: ['names', 'ages', 'emails'], type: 'column' }, { id: 2, row: ['ali', 23, '@bla bla'], type: 'row' }, { id: 2, row: ['alex', 26, '@ '], type: 'row' }, { id: 2, row: ['alex', 26, '# '], type: 'row' }]
+let table2 = [{ id: 0, row: ['names', 'ages', 'emails'], type: 'column' }, { id: 2, row: ['ali', 23, ''], type: 'row' }, { id: 2, row: ['alex', 26, ''], type: 'row' }, { id: 2, row: ['alex', 26, ''], type: 'row' }]
 const viewOptions = ['Defualt', 'Form', 'Chart']
 function TableViews() {
 

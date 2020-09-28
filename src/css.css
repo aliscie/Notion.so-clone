@@ -9,3 +9,23 @@
   outline: none;
   cursor: auto;
     }
+
+
+thead{
+  color: #AFAEAC;
+  padding: 5px;
+  border: 0.1px solid rgb(223, 222, 222);
+  width: 100px;
+
+}
+tbody{
+  display: inline-block;
+  border: .1px solid rgb(223, 222, 222);
+  width: 100px;
+}
+th{
+  display: inline;
+}
+table{
+  display: flex;
+}

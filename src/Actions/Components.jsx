@@ -5,22 +5,22 @@ import ViewOptions from '../components/ViewOptions'
 import Form from '../Views/Form'
 import Chart from '../Views/Chart'
 
-function Components({ dragable, setOver, setAnchorEl2, setChoose, elements, View, isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl, Indexing }) {
+function Components({ provided, index, dragable, setOver, setAnchorEl2, setChoose, elements, View, isDragging, state, set, e, setAnchorEl, elementsStyle, anchorEl, Indexing }) {
       const [mouseIsOver, SetIsOver] = useState(false)
       const [searchValue, setSearch] = useState('')
 
       return (
             <div>
-                  {View === 'Text' && <Text dragable={dragable} serOver={setOver} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} state={state} set={set} />}
-                  {View === 'TableH' && <Table dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
+                  {View === 'Text' && <Text index={index} dragable={dragable} serOver={setOver} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} state={state} set={set} />}
+                  {View === 'TableH' && <Table provided={provided} index={index} dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
                   {View === 'Views' && <ViewOptions
                         dragable={dragable}
                         set={set} state={state}
                         setAnchorEl2={setAnchorEl2}
                         setChoose={setChoose}
                         Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
-                  {View === 'Form' && <Form dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
-                  {View === 'Chart' && <Chart dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
+                  {View === 'Form' && <Form index={index} dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
+                  {View === 'Chart' && <Chart index={index} dragable={dragable} set={set} state={state} Indexing={Indexing} setSearch={setSearch} setAnchorEl={setAnchorEl} anchorEl={anchorEl} searchValue={searchValue} elementsStyle={elementsStyle} e={e} isDragging={isDragging} SetIsOver={SetIsOver} mouseIsOver={mouseIsOver} />}
 
 
             </div>

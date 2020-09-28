@@ -4,7 +4,7 @@ import handlKey from '../Actions/handlKey'
 import Pop from '../components/Pop'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
-function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, searchValue, anchorEl, setAnchorEl, setSearch }) {
+function Text({ index, dragable, state, set, e, isDragging, SetIsOver, elementsStyle, searchValue, anchorEl, setAnchorEl, setSearch }) {
 
       const [mentE, setMentE] = useState(null);
       const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ function Text({ dragable, state, set, e, isDragging, SetIsOver, elementsStyle, s
                               ref={target}
                               contentEditable='true'
                               suppressContentEditableWarning={true}
-                              onKeyUp={(event) => handlKey(event, e, state, set, setAnchorEl, setShow)}
+                              onKeyUp={(event) => handlKey(event, e, state, set, setAnchorEl, setShow, index)}
                               onKeyDown={handlId}
                               style={{ ...e.style, ...elementsStyle, width: '100%', display: 'inline' }}
                               placeholder='type or hit command.'

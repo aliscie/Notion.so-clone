@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { ListNested } from 'react-bootstrap-icons';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import Button from '@material-ui/core/Button';
 
-function Table({ dragable, state, set, e }) {
+function Table({ provided, index, dragable, state, set, e }) {
       const [isover, setIsover] = useState(false)
 
       function hanldKeyup(event) {
-            const index = state.findIndex((item) => `${item.row}` == event.target.id);
-
             if (event.keyCode == 13) {
                   event.preventDefault()
                   event.target.innerText = event.target.innerText.split('\n').join('')
@@ -18,6 +18,7 @@ function Table({ dragable, state, set, e }) {
                               ...pre.slice(index + 1, state.length)
                         ];
                   });
+                  // console.log(event.target.value.includes('=') && true)
             }
 
             if (event.keyCode !== 13) {
@@ -28,17 +29,21 @@ function Table({ dragable, state, set, e }) {
 
 
       return (
-            <div
+            <table
+
             >
                   {e.type === 'column' && e.row.map(cell => (
-                        <div
-                              key={cell}
-                              style={{ color: '#AFAEAC', padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
-                        >
-                              <ListNested />
-                              <div suppressContentEditableWarning={true} contentEditable style={{ display: 'inline' }}>{cell}</div>
-                        </div>
+                        <thead {...provided.dragHandleProps} {...provided.draggableProps}>
+                              <div
+                                    key={cell}
+                              >
+                                    <ListNested />
+                                    <th suppressContentEditableWarning={true} contentEditable >{cell}</th>
+
+                              </div>
+                        </thead>
                   ))}
+                  {e.type === 'column' && index == state[0].row.length - 1 && <Button className='addcolumn' value={AddBoxIcon} style={{ outline: 'none' }} ><AddBoxIcon /></Button>}
 
                   <div onMouseOver={() => setIsover(true)} onMouseLeave={() => setIsover(false)}>
 
@@ -48,23 +53,20 @@ function Table({ dragable, state, set, e }) {
                               <DragIndicatorIcon />
                         </div>}
 
-                        {e.type !== 'column' && e.row.map((cell, index) => (
-                              <div
-
+                        {e.type !== 'column' && e.row.map((cell, Index) => (
+                              <tbody
                                     key={cell}
-                                    style={{ padding: '5px', display: 'inline-block', width: '130px', border: '0.1px solid rgb(223, 222, 222)', margin: '-0.7px' }}
-
                               >
-
-                                    <div id={e.row} className={index} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >
+                                    <th
+                                          id={e.row} className={index} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >
                                           {cell}
-                                    </div>
-                              </div>
+                                    </th>
+                              </tbody>
                         ))}
                   </div>
 
 
-            </div>
+            </table>
       )
 }
 

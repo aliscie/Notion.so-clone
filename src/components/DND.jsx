@@ -27,7 +27,7 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                                                             {...provided.draggableProps}
 
                                                       >
-                                                            <Components dragable={provided.dragHandleProps} setAnchorEl2={setAnchorEl2} setChoose={setChoose} View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                                            <Components dragable={provided.dragHandleProps} setAnchorEl2={setAnchorEl2} setChoose={setChoose} View={View} index={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                       </div>
                                                 )}
                                           </Draggable>
@@ -90,10 +90,9 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                                                 {(provided, snapshot) => (
                                                       <div
                                                             ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
+
                                                       >
-                                                            <Components View={View} Indexing={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
+                                                            <Components provided={provided} View={View} index={index} isDragging={snapshot.isDragging} anchorEl={anchorEl} setAnchorEl={setAnchorEl} elementsStyle={elementsStyle} state={state} set={set} e={e} />
                                                       </div>
                                                 )}
                                           </Draggable>
@@ -157,7 +156,7 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                   return pre
             })
             //state don't convert?
-            console.log(state)
+            // console.log(state)
             // console.log(columns)
 
       }
@@ -169,7 +168,7 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                   return pre
             })
             //this works very well.
-            console.log(state)
+            // console.log(state)
       }
       return (
             <div>

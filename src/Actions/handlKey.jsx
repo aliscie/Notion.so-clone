@@ -1,7 +1,6 @@
 let thelement
 let position
-function handlKey(event, e, state, set, setAnchorEl, setShow) {
-      const index = state.findIndex((item) => `${item.id}` == event.target.id);
+function handlKey(event, e, state, set, setAnchorEl, setShow, index) {
       set(pre => {
             pre[index].text = event.target.innerText
             return pre
