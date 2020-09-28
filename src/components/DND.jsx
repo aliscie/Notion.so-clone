@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Components from '../Actions/Components';
 
-
 const grid = 8
 
 function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elementsStyle, display, direction }) {
 
       const [state, set] = useState(elements)
-      const [columns, setC] = useState(elements)
+      const [columns, setC] = useState(state)
 
       const [anchorEl, setAnchorEl] = useState(null);
 
@@ -99,7 +98,8 @@ function DND({ height, setAnchorEl2, setChoose, View, elements, boxStyle, elemen
                                     }
                               </div>
                         ))}
-                  </div>
+
+                  </div >
             )
       }
       function DropH() {

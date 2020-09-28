@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ListNested } from 'react-bootstrap-icons';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import Button from '@material-ui/core/Button';
 
 function Table({ provided, index, dragable, state, set, e }) {
       const [isover, setIsover] = useState(false)
@@ -27,23 +25,27 @@ function Table({ provided, index, dragable, state, set, e }) {
 
       }
 
+      function hanldKeyupColumn(event) {
+            //problem: after reunning this function table don't render automattcy
+            if (event.keyCode == 13) {
+                  event.target.innerText = event.target.innerText.split('\n').join('')
+                  set((pre) => {
+                        pre.map(row => row.row.push('new'))
+                        return pre
+                  });
+            }
+      }
 
       return (
-            <table
-
-            >
+            <table>
                   {e.type === 'column' && e.row.map(cell => (
                         <thead {...provided.dragHandleProps} {...provided.draggableProps}>
-                              <div
-                                    key={cell}
-                              >
+                              <div key={cell}>
                                     <ListNested />
-                                    <th suppressContentEditableWarning={true} contentEditable >{cell}</th>
-
+                                    <th onKeyUp={hanldKeyupColumn} suppressContentEditableWarning={true} contentEditable >{cell}</th>
                               </div>
                         </thead>
                   ))}
-                  {e.type === 'column' && index == state[0].row.length - 1 && <Button className='addcolumn' value={AddBoxIcon} style={{ outline: 'none' }} ><AddBoxIcon /></Button>}
 
                   <div onMouseOver={() => setIsover(true)} onMouseLeave={() => setIsover(false)}>
 
@@ -58,7 +60,12 @@ function Table({ provided, index, dragable, state, set, e }) {
                                     key={cell}
                               >
                                     <th
-                                          id={e.row} className={index} onKeyUp={hanldKeyup} suppressContentEditableWarning={true} contentEditable >
+                                          id={e.row}
+                                          className={index}
+                                          onKeyUp={hanldKeyup}
+                                          suppressContentEditableWarning={true}
+                                          contentEditable
+                                    >
                                           {cell}
                                     </th>
                               </tbody>

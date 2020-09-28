@@ -23,7 +23,7 @@ function handlKey(event, e, state, set, setAnchorEl, setShow, index) {
             set((pre) => {
                   return [
                         ...pre.slice(0, index + 1),
-                        { id: state.length + 1, text: null, style: { color: 'black' }, checkBox: (state[index].checkBox !== null) ? false : null },
+                        { id: pre.length + 1, text: null, style: { color: 'black' }, checkBox: (state[index].checkBox !== null) ? false : null },
                         ...pre.slice(index + 1, state.length)
                   ];
             });
